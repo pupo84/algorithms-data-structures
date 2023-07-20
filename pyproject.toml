@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "algorithms-data-structures"
+version = "0.1.0"
+description = ""
+authors = ["Matheus Pupo <matheus.pupo84@gmail.com>"]
+readme = "README.md"
+packages = [{include = "algorithms_data_structures"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.25.1"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
