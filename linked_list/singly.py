@@ -64,11 +64,17 @@ class LinkedList:
         return current
 
     def set(self, index: int, value: Any) -> bool:
+        """
+        Change value of element based on it's position
+        """
         node = self.get(index)
         node.value = value
         return True
 
     def pop_left(self) -> bool:
+        """
+        Reveme element from the left side
+        """
         if self.head:
             removed = self.head
 
@@ -85,6 +91,9 @@ class LinkedList:
         return False
 
     def pop_right(self) -> bool:
+        """
+        Remove element from the right side
+        """
         if self.tail:
             node = self.get(self.length - 2)
             self.tail = node
@@ -192,6 +201,30 @@ class LinkedList:
                 current_node = next_node
         self.head, self.tail = self.tail, self.head
 
+    def remove_duplicates(self):
+        """
+        Remove duplicated elements from the linked list
+        """
+        seen = set()
+        current_node = self.head
+        previous_node = None
+        for _ in range(self.length):
+            if current_node:
+                next_node = current_node.next
+
+                if current_node.value in seen and previous_node:
+                    if current_node == self.tail:
+                        previous_node.next = None
+                        self.tail = previous_node
+                    else:
+                        previous_node.next = next_node
+
+                    self.length -= 1
+
+                seen.add(current_node.value)
+                previous_node = current_node
+                current_node = next_node
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -218,5 +251,10 @@ if __name__ == "__main__":
     print(f"Insert itens: {ll.traverse()}")
     ll.reverse()
     print(f"Reverse: {ll.traverse()}")
+    ll.append(5)
+    ll.append(21)
+    print(f"Add itens: {ll.traverse()}")
+    ll.remove_duplicates()
+    print(f"Remove duplicates: {ll.traverse()}")
     ll.clear()
     print(f"Clear: {ll.traverse()}")
