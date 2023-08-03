@@ -86,7 +86,7 @@ class LinkedList:
 
     def pop_right(self) -> bool:
         if self.tail:
-            node = self.get(self.length - 1)
+            node = self.get(self.length - 2)
             self.tail = node
             self.length -= 1
             return True
@@ -178,6 +178,20 @@ class LinkedList:
 
         return True
 
+    def reverse(self) -> None:
+        """
+        Reverse linked list
+        """
+        current_node = self.head
+        previous_node = None
+        for _ in range(self.length):
+            if current_node:
+                next_node = current_node.next
+                current_node.next = previous_node
+                previous_node = current_node
+                current_node = next_node
+        self.head, self.tail = self.tail, self.head
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -187,15 +201,22 @@ if __name__ == "__main__":
     ll.append(5)
     ll.append(9)
     ll.insert(1, 10)
-    print(ll.traverse())
-    print(ll.search(100))
+    print(f"Add many: {ll.traverse()}")
+    print(f"Search 100: {ll.search(100)}")
+    print(f"Search: {ll.traverse()}")
     ll.set(2, 100)
-    print(ll.traverse())
+    print(f"Set: {ll.traverse()}")
     ll.pop_left()
-    print(ll.traverse())
+    print(f"Pop left: {ll.traverse()}")
     ll.pop_right()
-    print(ll.traverse())
+    print(f"Pop right: {ll.traverse()}")
     ll.delete(2)
-    print(ll.traverse())
+    print(f"Delete: {ll.traverse()}")
+    ll.append(21)
+    print(f"Append: {ll.traverse()}")
+    ll.insert(2, 15)
+    print(f"Insert itens: {ll.traverse()}")
+    ll.reverse()
+    print(f"Reverse: {ll.traverse()}")
     ll.clear()
-    print(ll.traverse())
+    print(f"Clear: {ll.traverse()}")
