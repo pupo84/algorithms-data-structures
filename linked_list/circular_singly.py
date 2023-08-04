@@ -53,6 +53,35 @@ class CircularSinglyLinkedList:
                 if current_node == self.tail:
                     self.tail = node
 
+    def search(self, value):
+        for index, node in enumerate(self):
+            if node.value == value:
+                return index
+        raise LookupError(f"Could not find value {value}")
+
+    def delete(self, value):
+        if self.head.value == value:
+            head_node = self.head
+            self.head = head_node.next
+            self.tail.next = head_node.next
+        else:
+            previous_node = None
+            for node in self:
+                if node.value == value:
+                    next_node = node.next
+                    previous_node.next = next_node
+
+                    if self.tail.value == value:
+                        self.tail = node.next
+                    return
+                previous_node = node
+            raise LookupError(f"Could not find value {value}")
+
+    def clear(self):
+        self.head = None
+        self.tail.next = None
+        self.tail = None
+
 
 if __name__ == "__main__":
     cll = CircularSinglyLinkedList()
@@ -64,4 +93,9 @@ if __name__ == "__main__":
     cll.insert(0, -1)
     cll.insert(5, 19)
     cll.insert(10, 19)
+    print(cll.search(5))
+    print([node.value for node in cll])
+    cll.delete(3)
+    print([node.value for node in cll])
+    cll.clear()
     print([node.value for node in cll])
